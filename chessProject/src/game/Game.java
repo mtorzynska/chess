@@ -68,11 +68,9 @@ public class Game{
             blackPlayer = humanPlayer;
         }
         if ((whiteKing.isStaleMate(board, whitePlayer)) || (blackKing.isStaleMate(board, blackPlayer))) {
-            System.out.println("PAT!!!!!!!!!!!!!!!!!!!!!!");
             return true;
         }
         if (whiteKing.isCheckMate(board, whitePlayer) || blackKing.isCheckMate(board, blackPlayer)){
-            System.out.println("MAT!!!!!!!!!!!!!!!!!!!!!!!!!!");
             return true;
         }
         return false;
