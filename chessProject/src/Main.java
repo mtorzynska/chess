@@ -8,8 +8,8 @@ public class Main {
     }
 }
 
-/* TODO:    check for checkmate
-            check for a stalemate
-            add castling
+/* TODO:    check for the reason of issues in checkmate
+            check if stalemate works
             implement interface
+            (extra) add castling
 */
