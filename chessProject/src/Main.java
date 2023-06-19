@@ -7,9 +7,3 @@ public class Main {
 
     }
 }
-
-/* TODO:    check for the reason of issues in checkmate
-            check if stalemate works
-            implement interface
-            (extra) add castling
-*/
