@@ -75,14 +75,14 @@ public class King extends Piece {
                     if (!isStillChecked) {
                         super.setFrom(originalFrom);
                         super.setTo(originalTo);
-                        return false;
+                        return true;
                     }
                 }
             }
         }
         super.setFrom(originalFrom);
         super.setTo(originalTo);
-        return true;
+        return false;
     }
 
     public boolean canBeDefended(Board board) {
@@ -105,12 +105,12 @@ public class King extends Piece {
                 super.setFrom(originalFrom);
                 super.setTo(originalTo);
 
-                if (!isStillChecked) return false; //a piece can capture the attacker
+                if (!isStillChecked) return true; //a piece can capture the attacker
             }
         }
         super.setFrom(originalFrom);
         super.setTo(originalTo);
-        return true;
+        return false;
     }
 
     public boolean canBeShielded(Board board) {
@@ -130,25 +130,17 @@ public class King extends Piece {
 
         List<Cell> playersPieces = getAllPieces(board, getColor());
         for (Cell possibleDefender : playersPieces) {
-            for (int i = 1; i < Math.max(rankDiff, fileDiff); i++) {
-                int rank, file;
-                if (rankDiff == 0){
-                    rank = kingsPosition.getRank();
-                    file = kingsPosition.getFile() + (i * fileDirection);
-                }
-                else if (fileDiff == 0){
-                    rank = kingsPosition.getRank() + (i * rankDirection);
-                    file = kingsPosition.getFile();
-                }
-                else {
-                    rank = kingsPosition.getRank() + (i * rankDirection);
-                    file = kingsPosition.getFile() + (i * fileDirection);
-                }
-                Cell defendingSpot = board.gameBoard[rank][file];
-                if (possibleDefender.getPiece().isMoveValid(possibleDefender, defendingSpot, getPlayer(), board)) {
-                    super.setFrom(originalFrom);
-                    super.setTo(originalTo);
-                    return true;
+            for (int i = 1; i < rankDiff; i++) {
+                for (int j = 1; j < fileDiff; j++) {
+                    int rank = kingsPosition.getRank() + (i * rankDirection);
+                    int file = kingsPosition.getFile() + (i * fileDirection);
+                    if (file > 7 || file < 0 || rank > 7 || rank < 0) continue;
+                    Cell defendingSpot = board.gameBoard[rank][file];
+                    if (possibleDefender.getPiece().isMoveValid(possibleDefender, defendingSpot, getPlayer(), board)) {
+                        super.setFrom(originalFrom);
+                        super.setTo(originalTo);
+                        return true;
+                    }
                 }
             }
         }

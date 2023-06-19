@@ -1,7 +1,6 @@
 package game;
 import board.*;
 import pieces.*;
-import game.*;
 
 import java.util.Random;
 import java.util.Scanner;
@@ -28,30 +27,30 @@ public class Game{
 
             if (currentPlayer == humanPlayer) {
                 System.out.println("Your move!");
+                if (isGameOver()) break;
                 while (!canGameContinue) {
                     getInput();
                     if (getFrom().isEmpty()) continue;
                     canGameContinue = currentPlayer.makeMove(getFrom(), getTo(), board);
-                    if (isGameOver()) break;
                 }
                 board.printBoard();
                 currentPlayer = computerPlayer;
             }
             else {
                 System.out.println("Opponent's move!");
+                if (isGameOver()) break;
                 while (!canGameContinue) {
                     String move = currentPlayer.generateMove();
                     convertInput(move);
                     if (getFrom().isEmpty()) continue;
                     canGameContinue = currentPlayer.makeMove(getFrom(), getTo(), board);
-                    if (isGameOver()) break;
                 }
                 currentPlayer = humanPlayer;
                 board.printBoard();
-                if (isGameOver()) break;
             }
+            if (isGameOver()) break;
         }
-        }
+    }
 
     private boolean isGameOver() {
         Player whitePlayer;
@@ -68,9 +67,15 @@ public class Game{
             blackPlayer = humanPlayer;
         }
         if ((whiteKing.isStaleMate(board, whitePlayer)) || (blackKing.isStaleMate(board, blackPlayer))) {
+            System.out.println("Stale mate! Draw!");
             return true;
         }
-        if (whiteKing.isCheckMate(board, whitePlayer) || blackKing.isCheckMate(board, blackPlayer)){
+        if (whiteKing.isCheckMate(board, whitePlayer)){
+            System.out.println("Check mate! Game over! The winner is the black player.");
+            return true;
+        }
+        if (blackKing.isCheckMate(board, blackPlayer)){
+            System.out.println("Check mate! Game over! The winner is the white player.");
             return true;
         }
         return false;
