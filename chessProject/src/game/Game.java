@@ -70,12 +70,8 @@ public class Game{
             System.out.println("Stale mate! Draw!");
             return true;
         }
-        if (whiteKing.isCheckMate(board, whitePlayer)){
-            System.out.println("Check mate! Game over! The winner is the black player.");
-            return true;
-        }
-        if (blackKing.isCheckMate(board, blackPlayer)){
-            System.out.println("Check mate! Game over! The winner is the white player.");
+        if (whiteKing.isCheckMate(board, whitePlayer) || blackKing.isCheckMate(board, blackPlayer)){
+            System.out.println("Check mate! Game over!");
             return true;
         }
         return false;

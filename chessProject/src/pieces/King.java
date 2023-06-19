@@ -168,7 +168,21 @@ public class King extends Piece {
             for (int rank = 0; rank < 8; rank++){
                 for (int file = 0; file < 8; file++){
                     Cell possibleTo = board.gameBoard[rank][file];
-                    if (piece.getPiece().isMoveValid(piece, possibleTo, getPlayer(), board)) return false;
+                    if (piece.getPiece().isMoveValid(piece, possibleTo, getPlayer(), board)) {
+                        //checking if the move that player makes puts the king in a check
+                        Piece occupier = possibleTo.getPiece();
+                        board.updateBoard(piece, possibleTo);
+                        if (isChecked(board, getPlayer())){
+                            board.updateBoard(possibleTo, piece);
+                            possibleTo.setPiece(occupier);
+                        }
+                        else {
+                            //if a move is valid and doesn't put the king in a check, it is not stalemate
+                            board.updateBoard(possibleTo, piece);
+                            possibleTo.setPiece(occupier);
+                            return false;
+                        }
+                    }
                 }
             }
         }
