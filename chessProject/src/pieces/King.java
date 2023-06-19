@@ -42,7 +42,6 @@ public class King extends Piece {
                 setAttackerOnKing(spot);
                 setFrom(originalFrom);
                 setTo(originalTo);
-                System.out.println("CHECK"); //temporary print for testing purposes
                 return true;
             }
         }
@@ -152,7 +151,6 @@ public class King extends Piece {
     public boolean isCheckMate(Board board, Player player) {
         setPlayer(player);
         if (this.isChecked(board, getPlayer())) {
-            System.out.println(this.getAttackerOnKing());
             return !this.canBeDefended(board) && !canEscape(board) && !canBeShielded(board);
         }
         return false;
