@@ -37,12 +37,14 @@ public class Pawn extends Piece {
         }
         return false;
     }
+    
     private boolean isCaptureCorrect() {
         if (Math.abs(this.getFrom().getRank() - this.getTo().getRank()) == 1 && Math.abs(this.getFrom().getFile() - this.getTo().getFile()) == 1) {
             if (!this.getTo().isEmpty() && this.getTo().getPiece().getColor() != this.getColor()) return isGoingForwards();
         }
         return false;
     }
+
     private boolean isGoingForwards() {
         if (this.isWhite() && this.getFrom().getRank() < this.getTo().getRank()) return true;
         if (!this.isWhite() && this.getFrom().getRank() > this.getTo().getRank()) return true;
