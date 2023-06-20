@@ -65,7 +65,7 @@ public class Board{
     public void updateBoard(Cell from, Cell to){
         if((from.getPiece() instanceof Pawn && from.getPiece().isWhite() && to.getRank() == 7) ||
                 (from.getPiece() instanceof Pawn && !from.getPiece().isWhite() && to.getRank() == 0)){
-            //promoting a pawn - automatically a queen for simplicity (TODO might add other options later)
+            //promoting a pawn - automatically a queen for simplicity
             this.gameBoard[to.getRank()][to.getFile()].setPiece(new Queen(from.getPiece().getColor()));
         }
         else{
