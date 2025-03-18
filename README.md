@@ -1,0 +1,1 @@
+Simplified version of chess that allows the player to play a game of chess. The player is up against a "computer player" that chooses it's moves "randomly". The goal of the project was to correctly apply the ideas of OOP. Project was finalized in June of 2023
